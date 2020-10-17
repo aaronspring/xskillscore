@@ -85,7 +85,7 @@ def crps_gaussian(observations, mu, sig, dim=None, weights=None, keep_attrs=Fals
 
 
 def crps_quadrature(
-    x,
+    observations,
     cdf_or_dist,
     xmin=None,
     xmax=None,
@@ -99,7 +99,7 @@ def crps_quadrature(
 
     Parameters
     ----------
-    x : xarray.Dataset or xarray.DataArray
+    observations : xarray.Dataset or xarray.DataArray
         Observations associated with the forecast distribution ``cdf_or_dist``.
     cdf_or_dist : callable or scipy.stats.distribution
         Function which returns the cumulative density of the forecast
@@ -127,7 +127,7 @@ def crps_quadrature(
     """
     res = xr.apply_ufunc(
         properscoring.crps_quadrature,
-        x,
+        observations,
         cdf_or_dist,
         xmin,
         xmax,
